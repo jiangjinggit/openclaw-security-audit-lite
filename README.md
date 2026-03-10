@@ -2,29 +2,85 @@
 
 A lightweight MVP for auditing OpenClaw deployments for exposure, permission, skill-source, and logging risks.
 
-## Positioning
+## English
+
+### Positioning
 This project helps OpenClaw users answer one critical question:
 
 > Is my OpenClaw deployment safe enough to run in a real environment?
 
-## v0.1 scope
-- Landing page
-- Security check catalog
-- Audit intake form
-- Demo report page
-- Mock risk scoring data
+### Position in the product matrix
+This repository is the **security / audit module** in the broader OpenClaw Control Console direction.
 
-## Quick start
+Related modules:
+- `openclaw-monitor-lite` → runtime / observability module
+- `openclaw-template-market` → workflow / enablement module
+
+### Current scope
+- Landing page
+- Structured questionnaire
+- Risk scoring
+- Dynamic report generation
+- Remediation suggestions
+- Markdown report export
+- Lead admin with filtering
+
+### Quick start
 ```bash
 npm start
 # default http://localhost:4320
 ```
 
-## Roadmap
-- Automated evidence collection
-- Report export
-- Continuous re-check subscription
-- Multi-instance/team dashboard
+### Roadmap
+- Better report delivery UX
+- Better export formatting
+- Better customer-side history view
+- Team / multi-instance positioning
+
+---
+
+## 中文版
+
+### 这个项目是干什么的
+这是一个面向 OpenClaw 部署场景的**安全体检与审计产品原型**。
+
+它帮助用户回答一个最关键的问题：
+> **我现在这套 OpenClaw 部署，是否已经安全到可以进入真实环境？**
+
+### 它在整个产品矩阵里的位置
+这个仓库在 **OpenClaw Control Console** 路线里，承担的是：
+> **安全审计 / 风险评分 / 整改建议模块**
+
+另外两个关联模块：
+- `openclaw-monitor-lite`：运行监控模块
+- `openclaw-template-market`：模板与场景模块
+
+### 当前能力
+- landing page
+- 结构化问卷
+- 风险评分
+- 动态报告生成
+- 整改建议映射
+- Markdown 报告导出
+- 带筛选的线索后台
+
+### 为什么值得做
+当 OpenClaw 从“能跑”进入“真要用进业务”时，安全、审计、权限、暴露面就变成企业最先关心的问题。这个项目就是专门切这层付费点的。
+
+### 快速启动
+```bash
+npm start
+```
+默认地址：
+```bash
+http://localhost:4320
+```
+
+### 后续路线
+- 更好的正式报告体验
+- 更强导出格式
+- 更完整的客户侧历史视图
+- 团队版 / 多实例定位
 
 ## License
 MIT
