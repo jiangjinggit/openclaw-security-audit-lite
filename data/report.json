@@ -1,0 +1,11 @@
+{
+  "project": "Demo OpenClaw Workspace",
+  "score": 64,
+  "riskLevel": "medium-high",
+  "summary": "当前部署可运行，但存在公网暴露、权限边界过宽和审计记录不足的问题。",
+  "findings": [
+    {"title":"实例公网可达","severity":"high","evidence":"管理入口存在公网暴露风险","fix":"增加访问限制、内网隔离或网关鉴权"},
+    {"title":"执行权限过宽","severity":"high","evidence":"默认工具权限未分层","fix":"按角色和环境拆分权限边界"},
+    {"title":"缺少审计日志","severity":"medium","evidence":"关键动作缺少统一审计记录","fix":"增加日志留存与异常告警"}
+  ]
+}

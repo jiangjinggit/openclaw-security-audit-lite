@@ -1,0 +1,8 @@
+[
+  {"id":"public-exposure","title":"公网暴露检查","severity":"high","desc":"检查实例是否直接暴露公网、是否缺少访问限制。"},
+  {"id":"auth-misconfig","title":"鉴权配置检查","severity":"high","desc":"检查是否存在缺失鉴权、弱鉴权或错误的访问控制。"},
+  {"id":"tool-permission","title":"工具权限过宽检查","severity":"high","desc":"检查 agent 是否被授予过宽工具能力或危险执行权限。"},
+  {"id":"skill-source","title":"Skill 来源风险检查","severity":"medium","desc":"检查是否使用来源不明或未经审查的技能包。"},
+  {"id":"audit-log","title":"审计日志缺失检查","severity":"medium","desc":"检查是否缺少操作日志、告警和审计记录。"},
+  {"id":"cost-alert","title":"成本异常检查","severity":"low","desc":"检查是否缺少预算、成本阈值和异常监测。"}
+]

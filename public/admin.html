@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>线索后台</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <h1>Security Audit Lite · 线索后台</h1>
+      <p>查看提交的安全体检申请与重点关注风险。</p>
+    </div>
+    <div class="badge">Admin</div>
+  </header>
+
+  <nav class="nav-links"><a href="/">返回首页</a></nav>
+
+  <section class="stats">
+    <div class="card"><strong id="leadCount">0</strong><span>线索总数</span></div>
+    <div class="card"><strong>首批内测</strong><span>可优先转化</span></div>
+    <div class="card"><strong id="latestLead">-</strong><span>最近提交</span></div>
+  </section>
+
+  <section><h2>线索列表</h2><div id="leadList" class="grid"></div></section>
+  <script src="/admin.js"></script>
+</body>
+</html>

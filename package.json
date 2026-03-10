@@ -1,0 +1,11 @@
+{
+  "name": "openclaw-security-audit-lite",
+  "version": "0.1.0",
+  "private": true,
+  "description": "OpenClaw security audit and exposure check MVP",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,21 @@
+[
+  {
+    "name": "demo",
+    "contact": "demo@example.com",
+    "deployType": "VPS",
+    "publicAccess": "yes",
+    "riskConcern": "公网暴露",
+    "createdAt": "2026-03-10T14:04:12.509Z"
+  },
+  {
+    "name": "audit-demo",
+    "contact": "audit@example.com",
+    "deployType": "VPS",
+    "publicAccess": "yes",
+    "riskConcern": "公网暴露和权限过宽",
+    "score": 90,
+    "riskLevel": "high",
+    "status": "new",
+    "createdAt": "2026-03-10T14:11:37.724Z"
+  }
+]
