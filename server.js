@@ -13,6 +13,7 @@ const ctaPath = path.join(__dirname, 'data', 'cta.json');
 const reportTemplatePath = path.join(__dirname, 'data', 'report-template.json');
 const questionnairePath = path.join(__dirname, 'data', 'questionnaire.json');
 const reportOutputPath = path.join(__dirname, 'data', 'report-output.md');
+const reportPriorityPath = path.join(__dirname, 'data', 'report-priority.json');
 
 const types = {
   '.html': 'text/html; charset=utf-8',
@@ -55,6 +56,7 @@ function scoreLead(payload) {
   else if (auditLog.includes('部分')) score += 8;
   if (riskConcern.includes('权限') || riskConcern.includes('暴露') || riskConcern.includes('泄露')) score += 10;
 
+  score = Math.min(score, 100);
   const riskLevel = score >= 75 ? 'high' : score >= 45 ? 'medium' : 'low';
   return { score, riskLevel };
 }
@@ -62,6 +64,7 @@ function scoreLead(payload) {
 function buildDynamicReport(payload) {
   const { score, riskLevel } = scoreLead(payload);
   const findings = [];
+  const priorityMap = JSON.parse(fs.readFileSync(reportPriorityPath, 'utf8'));
   if (String(payload.publicAccess).includes('是') || String(payload.publicAccess).toLowerCase().includes('yes')) {
     findings.push({ title: '实例公网可达', severity: 'high', evidence: '实例暴露在公网访问路径中', fix: '增加网关鉴权、来源限制或内网隔离' });
   }
@@ -80,12 +83,19 @@ function buildDynamicReport(payload) {
   if (!findings.length) {
     findings.push({ title: '基础风险可控', severity: 'low', evidence: '当前输入下未发现明显高风险项', fix: '继续保持定期复检与配置审查' });
   }
+  const grouped = {
+    high: findings.filter(f => f.severity === 'high'),
+    medium: findings.filter(f => f.severity === 'medium'),
+    low: findings.filter(f => f.severity === 'low')
+  };
   return {
     project: payload.name || 'Submitted OpenClaw Workspace',
     score,
     riskLevel,
+    priority: priorityMap[riskLevel],
     summary: `根据问卷结果，当前部署风险等级为 ${riskLevel}，建议优先处理高风险权限与暴露面问题。`,
-    findings
+    findings,
+    grouped
   };
 }
 
@@ -100,6 +110,7 @@ http.createServer((req, res) => {
   if (url.pathname === '/api/report-template') return serveFile(res, reportTemplatePath);
   if (url.pathname === '/api/questionnaire') return serveFile(res, questionnairePath);
   if (url.pathname === '/api/report-output') return serveFile(res, reportOutputPath);
+  if (url.pathname === '/api/report-priority') return serveFile(res, reportPriorityPath);
   if (url.pathname === '/api/leads' && req.method === 'GET') {
     const all = JSON.parse(fs.readFileSync(leadsPath, 'utf8'));
     const status = url.searchParams.get('status');

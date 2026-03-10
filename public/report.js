@@ -1,8 +1,9 @@
 const page = document.getElementById('reportPage');
 Promise.all([
   fetch('/api/report').then(r => r.json()),
-  fetch('/api/report-template').then(r => r.json())
-]).then(([data, template]) => {
+  fetch('/api/report-template').then(r => r.json()),
+  fetch('/api/report-priority').then(r => r.json())
+]).then(([data, template, priorityMap]) => {
   const grouped = { high: [], medium: [], low: [] };
   data.findings.forEach(item => {
     if (!grouped[item.severity]) grouped[item.severity] = [];
@@ -14,7 +15,7 @@ Promise.all([
       <div class="card"><strong>${data.project}</strong><span>项目名称</span></div>
       <div class="card"><strong>${data.score}</strong><span>安全评分</span></div>
       <div class="card"><strong>${data.riskLevel}</strong><span>风险等级</span></div>
-      <div class="card"><strong>可整改</strong><span>输出可执行建议</span></div>
+      <div class="card"><strong>${priorityMap[data.riskLevel] || '待评估'}</strong><span>整改优先级</span></div>
     </section>
     <section class="card">
       <h2>摘要</h2>

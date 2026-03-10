@@ -62,8 +62,8 @@ fetch('/api/questionnaire').then(r => r.json()).then(fields => {
     const reportData = await reportRes.json();
     if (leadRes.ok) {
       leadResult.textContent = '提交成功，已进入首批安全体检线索池。';
-      scoreResult.innerHTML = `<strong>基础风险评分：</strong>${scoreData.score} / 100<br/><strong>风险等级：</strong>${scoreData.riskLevel}`;
-      reportPreview.innerHTML = `<strong>动态报告预览：</strong><br/>${reportData.report.summary}<br/><br/>${reportData.report.findings.map(f => `- [${f.severity}] ${f.title}`).join('<br/>')}`;
+      scoreResult.innerHTML = `<strong>基础风险评分：</strong>${scoreData.score} / 100<br/><strong>风险等级：</strong>${scoreData.riskLevel}<br/><strong>整改优先级：</strong>${reportData.report.priority}`;
+      reportPreview.innerHTML = `<strong>动态报告预览：</strong><br/>${reportData.report.summary}<br/><br/><strong>高风险：</strong> ${reportData.report.grouped.high.length} 项<br/><strong>中风险：</strong> ${reportData.report.grouped.medium.length} 项<br/><strong>低风险：</strong> ${reportData.report.grouped.low.length} 项`;
       leadForm.reset();
     } else {
       leadResult.textContent = '提交失败，请稍后重试。';
