@@ -1,5 +1,9 @@
 # OpenClaw Security Audit Lite
 
+![Status](https://img.shields.io/badge/status-active-brightgreen)
+![Module](https://img.shields.io/badge/module-security%20%2F%20audit-red)
+![License](https://img.shields.io/badge/license-MIT-black)
+
 A lightweight MVP for auditing OpenClaw deployments for exposure, permission, skill-source, and logging risks.
 
 ## English
@@ -30,6 +34,16 @@ Related modules:
 npm start
 # default http://localhost:4320
 ```
+
+### Screenshots / Demo
+> Add screenshots here later:
+- landing page
+- dynamic report preview
+- lead admin and prioritization view
+
+### Related repositories
+- [openclaw-monitor-lite](https://github.com/jiangjinggit/openclaw-monitor-lite)
+- [openclaw-template-market](https://github.com/jiangjinggit/openclaw-template-market)
 
 ### Roadmap
 - Better report delivery UX
@@ -75,6 +89,16 @@ npm start
 ```bash
 http://localhost:4320
 ```
+
+### 截图 / 演示区（占位）
+后续建议补三张图：
+- landing page
+- 动态报告预览页
+- 线索后台与优先级页
+
+### 关联仓库
+- [openclaw-monitor-lite](https://github.com/jiangjinggit/openclaw-monitor-lite)
+- [openclaw-template-market](https://github.com/jiangjinggit/openclaw-template-market)
 
 ### 后续路线
 - 更好的正式报告体验
