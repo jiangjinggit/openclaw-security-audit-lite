@@ -11,6 +11,8 @@ const plansPath = path.join(__dirname, 'data', 'plans.json');
 const leadStatusPath = path.join(__dirname, 'data', 'lead-status.json');
 const ctaPath = path.join(__dirname, 'data', 'cta.json');
 const reportTemplatePath = path.join(__dirname, 'data', 'report-template.json');
+const questionnairePath = path.join(__dirname, 'data', 'questionnaire.json');
+const reportOutputPath = path.join(__dirname, 'data', 'report-output.md');
 
 const types = {
   '.html': 'text/html; charset=utf-8',
@@ -32,16 +34,59 @@ function serveFile(res, filePath) {
 }
 
 function scoreLead(payload) {
-  let score = 20;
-  const publicAccess = String(payload.publicAccess || '').toLowerCase();
+  let score = 10;
   const deployType = String(payload.deployType || '').toLowerCase();
+  const publicAccess = String(payload.publicAccess || '').toLowerCase();
+  const authStatus = String(payload.authStatus || '').toLowerCase();
+  const toolPermission = String(payload.toolPermission || '').toLowerCase();
+  const skillSource = String(payload.skillSource || '').toLowerCase();
+  const auditLog = String(payload.auditLog || '').toLowerCase();
   const riskConcern = String(payload.riskConcern || '').toLowerCase();
-  if (publicAccess.includes('yes') || publicAccess.includes('公网')) score += 35;
-  if (deployType.includes('vps') || deployType.includes('云')) score += 15;
-  if (riskConcern.includes('权限') || riskConcern.includes('暴露') || riskConcern.includes('泄露')) score += 20;
-  if (riskConcern.includes('审计') || riskConcern.includes('日志')) score += 10;
-  const riskLevel = score >= 70 ? 'high' : score >= 45 ? 'medium' : 'low';
+
+  if (deployType.includes('vps') || deployType.includes('云')) score += 10;
+  if (publicAccess.includes('是') || publicAccess.includes('yes') || publicAccess.includes('公网')) score += 25;
+  if (authStatus.includes('无')) score += 20;
+  else if (authStatus.includes('基础')) score += 10;
+  if (toolPermission.includes('高')) score += 20;
+  else if (toolPermission.includes('中')) score += 10;
+  if (skillSource.includes('不明')) score += 15;
+  else if (skillSource.includes('部分')) score += 8;
+  if (auditLog.includes('没有')) score += 15;
+  else if (auditLog.includes('部分')) score += 8;
+  if (riskConcern.includes('权限') || riskConcern.includes('暴露') || riskConcern.includes('泄露')) score += 10;
+
+  const riskLevel = score >= 75 ? 'high' : score >= 45 ? 'medium' : 'low';
   return { score, riskLevel };
+}
+
+function buildDynamicReport(payload) {
+  const { score, riskLevel } = scoreLead(payload);
+  const findings = [];
+  if (String(payload.publicAccess).includes('是') || String(payload.publicAccess).toLowerCase().includes('yes')) {
+    findings.push({ title: '实例公网可达', severity: 'high', evidence: '实例暴露在公网访问路径中', fix: '增加网关鉴权、来源限制或内网隔离' });
+  }
+  if (String(payload.authStatus).includes('无')) {
+    findings.push({ title: '鉴权缺失', severity: 'high', evidence: '当前未设置有效鉴权', fix: '为管理入口和关键接口增加鉴权机制' });
+  }
+  if (String(payload.toolPermission).includes('高')) {
+    findings.push({ title: '工具权限过宽', severity: 'high', evidence: 'Agent 获得过高工具执行范围', fix: '按角色与环境收紧权限边界' });
+  }
+  if (String(payload.skillSource).includes('不明')) {
+    findings.push({ title: 'Skill 来源风险', severity: 'medium', evidence: '存在来源不明的技能包', fix: '建立技能白名单并校验来源' });
+  }
+  if (String(payload.auditLog).includes('没有')) {
+    findings.push({ title: '缺少审计日志', severity: 'medium', evidence: '关键动作未形成统一审计记录', fix: '增加日志留存、异常告警与巡检记录' });
+  }
+  if (!findings.length) {
+    findings.push({ title: '基础风险可控', severity: 'low', evidence: '当前输入下未发现明显高风险项', fix: '继续保持定期复检与配置审查' });
+  }
+  return {
+    project: payload.name || 'Submitted OpenClaw Workspace',
+    score,
+    riskLevel,
+    summary: `根据问卷结果，当前部署风险等级为 ${riskLevel}，建议优先处理高风险权限与暴露面问题。`,
+    findings
+  };
 }
 
 http.createServer((req, res) => {
@@ -53,6 +98,8 @@ http.createServer((req, res) => {
   if (url.pathname === '/api/lead-status') return serveFile(res, leadStatusPath);
   if (url.pathname === '/api/cta') return serveFile(res, ctaPath);
   if (url.pathname === '/api/report-template') return serveFile(res, reportTemplatePath);
+  if (url.pathname === '/api/questionnaire') return serveFile(res, questionnairePath);
+  if (url.pathname === '/api/report-output') return serveFile(res, reportOutputPath);
   if (url.pathname === '/api/leads' && req.method === 'GET') {
     const all = JSON.parse(fs.readFileSync(leadsPath, 'utf8'));
     const status = url.searchParams.get('status');
@@ -60,14 +107,18 @@ http.createServer((req, res) => {
     return send(res, 200, JSON.stringify(filtered), 'application/json; charset=utf-8');
   }
 
-  if (url.pathname === '/api/score' && req.method === 'POST') {
+  if ((url.pathname === '/api/score' || url.pathname === '/api/dynamic-report') && req.method === 'POST') {
     let body = '';
     req.on('data', chunk => body += chunk);
     req.on('end', () => {
       try {
         const payload = JSON.parse(body || '{}');
-        const result = scoreLead(payload);
-        send(res, 200, JSON.stringify({ ok: true, ...result }), 'application/json; charset=utf-8');
+        if (url.pathname === '/api/score') {
+          const result = scoreLead(payload);
+          return send(res, 200, JSON.stringify({ ok: true, ...result }), 'application/json; charset=utf-8');
+        }
+        const report = buildDynamicReport(payload);
+        return send(res, 200, JSON.stringify({ ok: true, report }), 'application/json; charset=utf-8');
       } catch {
         send(res, 400, JSON.stringify({ ok: false }), 'application/json; charset=utf-8');
       }

@@ -13,7 +13,7 @@
       <p>10 分钟判断你的 OpenClaw 部署是否存在暴露、权限或审计风险。</p>
       <div id="ctaBox" class="button-row"></div>
     </div>
-    <div class="badge">v0.3</div>
+    <div class="badge">v0.4</div>
   </header>
 
   <nav class="nav-links">
@@ -40,18 +40,15 @@
   <section class="lead-box">
     <div>
       <h2>申请首批安全体检</h2>
-      <p>提交部署信息，我们将生成首批审计线索与体验报告。</p>
+      <p>提交结构化部署信息，我们将生成动态风险预览与体检线索。</p>
     </div>
-    <form id="leadForm" class="lead-form">
-      <input name="name" placeholder="你的称呼" required />
-      <input name="contact" placeholder="邮箱 / 微信 / Telegram" required />
-      <input name="deployType" placeholder="部署方式（本地/VPS/云主机）" required />
-      <input name="publicAccess" placeholder="是否公网可访问" required />
-      <input name="riskConcern" placeholder="你最担心的风险" required />
-      <button type="submit">提交体检申请</button>
-    </form>
-    <p id="leadResult" class="lead-result"></p>
-    <div id="scoreResult" class="score-box"></div>
+    <form id="leadForm" class="lead-form"></form>
+    <div>
+      <p id="leadResult" class="lead-result"></p>
+      <div id="scoreResult" class="score-box"></div>
+      <div id="reportPreview" class="score-box"></div>
+      <a class="cta-btn" href="/api/report-output" target="_blank">查看 Markdown 报告示例</a>
+    </div>
   </section>
 
   <script src="/app.js"></script>

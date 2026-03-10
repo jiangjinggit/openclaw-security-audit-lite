@@ -2,6 +2,7 @@ const leadCount = document.getElementById('leadCount');
 const latestLead = document.getElementById('latestLead');
 const leadList = document.getElementById('leadList');
 const statusFilter = document.getElementById('statusFilter');
+const riskFilter = document.getElementById('riskFilter');
 
 async function loadLeads() {
   const query = statusFilter.value ? `?status=${statusFilter.value}` : '';
@@ -9,9 +10,10 @@ async function loadLeads() {
     fetch('/api/leads' + query).then(r => r.json()),
     fetch('/api/lead-status').then(r => r.json())
   ]);
-  leadCount.textContent = data.length;
-  latestLead.textContent = data.length ? new Date(data[data.length - 1].createdAt).toLocaleDateString('zh-CN') : '-';
-  leadList.innerHTML = data.slice().reverse().map(item => `
+  const filtered = riskFilter.value ? data.filter(item => item.riskLevel === riskFilter.value) : data;
+  leadCount.textContent = filtered.length;
+  latestLead.textContent = filtered.length ? new Date(filtered[filtered.length - 1].createdAt).toLocaleDateString('zh-CN') : '-';
+  leadList.innerHTML = filtered.slice().reverse().map(item => `
     <article class="check">
       <h3>${item.name}</h3>
       <p><strong>联系方式：</strong>${item.contact}</p>
@@ -27,4 +29,5 @@ async function loadLeads() {
 }
 
 statusFilter.addEventListener('change', loadLeads);
+riskFilter.addEventListener('change', loadLeads);
 loadLeads();

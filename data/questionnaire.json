@@ -1,0 +1,38 @@
+[
+  {
+    "id": "deployType",
+    "label": "部署方式",
+    "type": "select",
+    "options": ["本地机器", "VPS", "云主机", "企业内网"]
+  },
+  {
+    "id": "publicAccess",
+    "label": "是否公网可访问",
+    "type": "select",
+    "options": ["是", "否"]
+  },
+  {
+    "id": "authStatus",
+    "label": "当前鉴权状态",
+    "type": "select",
+    "options": ["无鉴权", "基础鉴权", "较完善鉴权"]
+  },
+  {
+    "id": "toolPermission",
+    "label": "工具权限范围",
+    "type": "select",
+    "options": ["高权限", "中等权限", "低权限"]
+  },
+  {
+    "id": "skillSource",
+    "label": "Skill 来源情况",
+    "type": "select",
+    "options": ["来源不明", "部分可信", "全部可信"]
+  },
+  {
+    "id": "auditLog",
+    "label": "是否有审计日志与告警",
+    "type": "select",
+    "options": ["没有", "部分有", "较完整"]
+  }
+]
