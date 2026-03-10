@@ -13,7 +13,7 @@
       <p>10 分钟判断你的 OpenClaw 部署是否存在暴露、权限或审计风险。</p>
       <div id="ctaBox" class="button-row"></div>
     </div>
-    <div class="badge">v0.4</div>
+    <div class="badge">v0.6</div>
   </header>
 
   <nav class="nav-links">
@@ -47,7 +47,11 @@
       <p id="leadResult" class="lead-result"></p>
       <div id="scoreResult" class="score-box"></div>
       <div id="reportPreview" class="score-box"></div>
-      <a class="cta-btn" href="/api/report-output" target="_blank">查看 Markdown 报告示例</a>
+      <div id="remediationPreview" class="score-box"></div>
+      <div class="button-row">
+        <a class="cta-btn" href="/api/report-output" target="_blank">查看 Markdown 报告示例</a>
+        <button id="exportBtn" class="cta-btn primary" type="button">导出正式报告</button>
+      </div>
     </div>
   </section>
 

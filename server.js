@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { execFile } = require('child_process');
 
 const port = process.env.PORT || 4320;
 const publicDir = path.join(__dirname, 'public');
@@ -14,6 +15,8 @@ const reportTemplatePath = path.join(__dirname, 'data', 'report-template.json');
 const questionnairePath = path.join(__dirname, 'data', 'questionnaire.json');
 const reportOutputPath = path.join(__dirname, 'data', 'report-output.md');
 const reportPriorityPath = path.join(__dirname, 'data', 'report-priority.json');
+const remediationMapPath = path.join(__dirname, 'data', 'remediation-map.json');
+const exportLogPath = path.join(__dirname, 'data', 'export-log.json');
 
 const types = {
   '.html': 'text/html; charset=utf-8',
@@ -88,6 +91,8 @@ function buildDynamicReport(payload) {
     medium: findings.filter(f => f.severity === 'medium'),
     low: findings.filter(f => f.severity === 'low')
   };
+  const remediationMap = JSON.parse(fs.readFileSync(remediationMapPath, 'utf8'));
+  const remediation = findings.flatMap(f => (remediationMap[f.title] || []).map(text => ({ relatedTo: f.title, text })));
   return {
     project: payload.name || 'Submitted OpenClaw Workspace',
     score,
@@ -95,7 +100,8 @@ function buildDynamicReport(payload) {
     priority: priorityMap[riskLevel],
     summary: `根据问卷结果，当前部署风险等级为 ${riskLevel}，建议优先处理高风险权限与暴露面问题。`,
     findings,
-    grouped
+    grouped,
+    remediation
   };
 }
 
@@ -111,11 +117,20 @@ http.createServer((req, res) => {
   if (url.pathname === '/api/questionnaire') return serveFile(res, questionnairePath);
   if (url.pathname === '/api/report-output') return serveFile(res, reportOutputPath);
   if (url.pathname === '/api/report-priority') return serveFile(res, reportPriorityPath);
+  if (url.pathname === '/api/export-log') return serveFile(res, exportLogPath);
   if (url.pathname === '/api/leads' && req.method === 'GET') {
     const all = JSON.parse(fs.readFileSync(leadsPath, 'utf8'));
     const status = url.searchParams.get('status');
     const filtered = status ? all.filter(item => item.status === status) : all;
     return send(res, 200, JSON.stringify(filtered), 'application/json; charset=utf-8');
+  }
+
+  if (url.pathname === '/api/export-report' && req.method === 'POST') {
+    execFile('node', [path.join(__dirname, 'scripts', 'export-report.js')], (err, stdout, stderr) => {
+      if (err) return send(res, 500, JSON.stringify({ ok: false, error: stderr || err.message }), 'application/json; charset=utf-8');
+      return send(res, 200, JSON.stringify({ ok: true, output: stdout.trim() }), 'application/json; charset=utf-8');
+    });
+    return;
   }
 
   if ((url.pathname === '/api/score' || url.pathname === '/api/dynamic-report') && req.method === 'POST') {

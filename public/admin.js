@@ -10,10 +10,11 @@ async function loadLeads() {
     fetch('/api/leads' + query).then(r => r.json()),
     fetch('/api/lead-status').then(r => r.json())
   ]);
-  const filtered = riskFilter.value ? data.filter(item => item.riskLevel === riskFilter.value) : data;
+  let filtered = riskFilter.value ? data.filter(item => item.riskLevel === riskFilter.value) : data;
+  filtered = filtered.sort((a, b) => (b.score || 0) - (a.score || 0));
   leadCount.textContent = filtered.length;
-  latestLead.textContent = filtered.length ? new Date(filtered[filtered.length - 1].createdAt).toLocaleDateString('zh-CN') : '-';
-  leadList.innerHTML = filtered.slice().reverse().map(item => `
+  latestLead.textContent = filtered.length ? new Date(filtered[0].createdAt).toLocaleDateString('zh-CN') : '-';
+  leadList.innerHTML = filtered.map(item => `
     <article class="check">
       <h3>${item.name}</h3>
       <p><strong>联系方式：</strong>${item.contact}</p>
