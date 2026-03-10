@@ -1,5 +1,6 @@
 const checksBox = document.getElementById('checks');
 const plansBox = document.getElementById('plans');
+const ctaBox = document.getElementById('ctaBox');
 const leadForm = document.getElementById('leadForm');
 const leadResult = document.getElementById('leadResult');
 const scoreResult = document.getElementById('scoreResult');
@@ -22,6 +23,13 @@ fetch('/api/plans').then(r => r.json()).then(data => {
       <p>${item.desc}</p>
     </article>
   `).join('');
+});
+
+fetch('/api/cta').then(r => r.json()).then(data => {
+  ctaBox.innerHTML = `
+    <a class="cta-btn primary" href="${data.primary.url}" target="_blank">${data.primary.text}</a>
+    <a class="cta-btn" href="${data.secondary.url}" target="_blank">${data.secondary.text}</a>
+  `;
 });
 
 leadForm.addEventListener('submit', async (e) => {

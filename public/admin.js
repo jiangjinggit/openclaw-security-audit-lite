@@ -1,11 +1,14 @@
 const leadCount = document.getElementById('leadCount');
 const latestLead = document.getElementById('latestLead');
 const leadList = document.getElementById('leadList');
+const statusFilter = document.getElementById('statusFilter');
 
-Promise.all([
-  fetch('/api/leads').then(r => r.json()),
-  fetch('/api/lead-status').then(r => r.json())
-]).then(([data, statusMap]) => {
+async function loadLeads() {
+  const query = statusFilter.value ? `?status=${statusFilter.value}` : '';
+  const [data, statusMap] = await Promise.all([
+    fetch('/api/leads' + query).then(r => r.json()),
+    fetch('/api/lead-status').then(r => r.json())
+  ]);
   leadCount.textContent = data.length;
   latestLead.textContent = data.length ? new Date(data[data.length - 1].createdAt).toLocaleDateString('zh-CN') : '-';
   leadList.innerHTML = data.slice().reverse().map(item => `
@@ -21,4 +24,7 @@ Promise.all([
       <p class="muted">${item.createdAt}</p>
     </article>
   `).join('') || '<div class="check">暂无线索</div>';
-});
+}
+
+statusFilter.addEventListener('change', loadLeads);
+loadLeads();

@@ -9,6 +9,8 @@ const reportPath = path.join(__dirname, 'data', 'report.json');
 const leadsPath = path.join(__dirname, 'data', 'leads.json');
 const plansPath = path.join(__dirname, 'data', 'plans.json');
 const leadStatusPath = path.join(__dirname, 'data', 'lead-status.json');
+const ctaPath = path.join(__dirname, 'data', 'cta.json');
+const reportTemplatePath = path.join(__dirname, 'data', 'report-template.json');
 
 const types = {
   '.html': 'text/html; charset=utf-8',
@@ -49,7 +51,14 @@ http.createServer((req, res) => {
   if (url.pathname === '/api/report') return serveFile(res, reportPath);
   if (url.pathname === '/api/plans') return serveFile(res, plansPath);
   if (url.pathname === '/api/lead-status') return serveFile(res, leadStatusPath);
-  if (url.pathname === '/api/leads' && req.method === 'GET') return serveFile(res, leadsPath);
+  if (url.pathname === '/api/cta') return serveFile(res, ctaPath);
+  if (url.pathname === '/api/report-template') return serveFile(res, reportTemplatePath);
+  if (url.pathname === '/api/leads' && req.method === 'GET') {
+    const all = JSON.parse(fs.readFileSync(leadsPath, 'utf8'));
+    const status = url.searchParams.get('status');
+    const filtered = status ? all.filter(item => item.status === status) : all;
+    return send(res, 200, JSON.stringify(filtered), 'application/json; charset=utf-8');
+  }
 
   if (url.pathname === '/api/score' && req.method === 'POST') {
     let body = '';

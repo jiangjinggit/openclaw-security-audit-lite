@@ -1,0 +1,7 @@
+{
+  "sections": [
+    {"name":"high","title":"高风险项"},
+    {"name":"medium","title":"中风险项"},
+    {"name":"low","title":"低风险项"}
+  ]
+}
