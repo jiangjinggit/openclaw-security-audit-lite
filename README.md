@@ -57,6 +57,8 @@ npm start
 - [First batch flow](docs/FIRST_BATCH_FLOW.md)
 - [Typical risk scenarios](docs/TYPICAL_RISK_SCENARIOS.md)
 - [Fit guide](docs/FIT_GUIDE.md)
+- [Customer scenarios](docs/CUSTOMER_SCENARIOS.md)
+- [Buying path](docs/BUYING_PATH.md)
 - [FAQ](docs/FAQ.md)
 - [Chinese security checklist](docs/OPENCLAW_SECURITY_CHECKLIST_CN.md)
 
