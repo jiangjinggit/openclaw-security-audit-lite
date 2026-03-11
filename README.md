@@ -55,6 +55,7 @@ npm start
 - [First 299 RMB offer](docs/FIRST_OFFER_299.md)
 - [First batch 199 RMB offer](docs/FIRST_BATCH_199.md)
 - [First batch CTA strategy](docs/FIRST_BATCH_CTA.md)
+- [Scarcity strategy](docs/SCARCITY_STRATEGY.md)
 - [Security + observability positioning](docs/SECURITY_PLUS_OBSERVABILITY.md)
 - [Plan comparison](docs/PLAN_COMPARISON.md)
 - [Case placeholders](docs/CASE_PLACEHOLDERS.md)
