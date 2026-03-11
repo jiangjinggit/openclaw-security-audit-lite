@@ -21,13 +21,16 @@ Related modules:
 - `openclaw-template-market` → workflow / enablement module
 
 ### Current scope
-- Landing page
+- Landing page for private deployment health-check
 - Structured questionnaire
 - Risk scoring
 - Dynamic report generation
 - Remediation suggestions
 - Markdown report export
 - Lead admin with filtering
+
+### Best current packaging
+This repo is currently strongest as a **private deployment health-check / security baseline / skill-risk scan** product, not as a heavy consulting service.
 
 ### Quick start
 ```bash
@@ -47,6 +50,7 @@ npm start
 
 ### Offer packaging
 - [Security baseline offer](docs/SECURITY_BASELINE_OFFER.md)
+- [Private deployment health-check landing copy](docs/PRIVATE_DEPLOYMENT_HEALTHCHECK_LANDING.md)
 - [Chinese security checklist](docs/OPENCLAW_SECURITY_CHECKLIST_CN.md)
 
 ### Roadmap
