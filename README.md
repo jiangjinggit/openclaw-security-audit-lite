@@ -54,6 +54,8 @@ npm start
 - [Deliverables](docs/DELIVERABLES.md)
 - [Why productized, not consulting](docs/WHY_PRODUCTIZED_NOT_CONSULTING.md)
 - [Pricing and fit](docs/PRICING_AND_FIT.md)
+- [First batch flow](docs/FIRST_BATCH_FLOW.md)
+- [FAQ](docs/FAQ.md)
 - [Chinese security checklist](docs/OPENCLAW_SECURITY_CHECKLIST_CN.md)
 
 ### Roadmap
