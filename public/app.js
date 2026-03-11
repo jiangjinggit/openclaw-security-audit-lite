@@ -48,8 +48,8 @@ fetch('/api/questionnaire').then(r => r.json()).then(fields => {
         </select>
       </label>
     `).join('')}
-    <input name="riskConcern" placeholder="你最担心的风险" required />
-    <button type="submit">提交免费预检信息</button>
+    <input name="riskConcern" placeholder="你最担心的风险 / 现在最想先确认的问题" required />
+    <button type="submit">申请首批体检名额</button>
   `;
 
   leadForm.addEventListener('submit', async (e) => {
@@ -65,7 +65,7 @@ fetch('/api/questionnaire').then(r => r.json()).then(fields => {
     const reportData = await reportRes.json();
     lastReport = reportData.report;
     if (leadRes.ok) {
-      leadResult.textContent = '提交成功，已进入首批私有部署体检线索池。';
+      leadResult.textContent = '提交成功，已进入首批体检招募池；将按 199 元内测 / 299 元正式版优先匹配。';
       scoreResult.innerHTML = `<strong>部署风险评分：</strong>${scoreData.score} / 100<br/><strong>风险等级：</strong>${scoreData.riskLevel}<br/><strong>整改优先级：</strong>${reportData.report.priority}`;
       reportPreview.innerHTML = `<strong>动态报告预览：</strong><br/>${reportData.report.summary}<br/><br/><strong>高风险：</strong> ${reportData.report.grouped.high.length} 项<br/><strong>中风险：</strong> ${reportData.report.grouped.medium.length} 项<br/><strong>低风险：</strong> ${reportData.report.grouped.low.length} 项`;
       remediationPreview.innerHTML = `<strong>优先整改建议：</strong><br/>${reportData.report.remediation.slice(0,4).map(item => `- ${item.text}`).join('<br/>') || '暂无'}`;
