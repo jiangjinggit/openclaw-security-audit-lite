@@ -53,6 +53,7 @@ npm start
 - [Private deployment health-check landing copy](docs/PRIVATE_DEPLOYMENT_HEALTHCHECK_LANDING.md)
 - [Homepage one-pager](docs/HOMEPAGE_ONE_PAGER.md)
 - [First 299 RMB offer](docs/FIRST_OFFER_299.md)
+- [First batch 199 RMB offer](docs/FIRST_BATCH_199.md)
 - [Security + observability positioning](docs/SECURITY_PLUS_OBSERVABILITY.md)
 - [Plan comparison](docs/PLAN_COMPARISON.md)
 - [Case placeholders](docs/CASE_PLACEHOLDERS.md)
