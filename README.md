@@ -45,6 +45,10 @@ npm start
 - [openclaw-monitor-lite](https://github.com/jiangjinggit/openclaw-monitor-lite)
 - [openclaw-template-market](https://github.com/jiangjinggit/openclaw-template-market)
 
+### Offer packaging
+- [Security baseline offer](docs/SECURITY_BASELINE_OFFER.md)
+- [Chinese security checklist](docs/OPENCLAW_SECURITY_CHECKLIST_CN.md)
+
 ### Roadmap
 - Better report delivery UX
 - Better export formatting
