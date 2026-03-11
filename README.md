@@ -60,6 +60,7 @@ npm start
 - [Baseline hardening and recheck](docs/BASELINE_AND_RECHECK.md)
 - [Skill risk positioning](docs/SKILL_RISK_POSITIONING.md)
 - [Recheck before/after](docs/RECHECK_BEFORE_AFTER.md)
+- [Delivery artifacts plus](docs/DELIVERY_ARTIFACTS_PLUS.md)
 - [Plan comparison](docs/PLAN_COMPARISON.md)
 - [Case placeholders](docs/CASE_PLACEHOLDERS.md)
 - [Anonymous case result format](docs/ANON_CASE_RESULTS.md)
