@@ -49,7 +49,7 @@ fetch('/api/questionnaire').then(r => r.json()).then(fields => {
       </label>
     `).join('')}
     <input name="riskConcern" placeholder="你最担心的风险" required />
-    <button type="submit">提交体检申请</button>
+    <button type="submit">提交免费预检信息</button>
   `;
 
   leadForm.addEventListener('submit', async (e) => {
