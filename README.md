@@ -60,6 +60,7 @@ npm start
 - [Case placeholders](docs/CASE_PLACEHOLDERS.md)
 - [Anonymous case result format](docs/ANON_CASE_RESULTS.md)
 - [Anonymous case cards](docs/ANON_CASE_CARDS.md)
+- [Case results priority](docs/CASE_RESULTS_PRIORITY.md)
 - [24h / 48h delivery expectations](docs/SLA_EXPECTATIONS.md)
 - [Delivery checklist](docs/DELIVERY_CHECKLIST.md)
 - [Deliverables](docs/DELIVERABLES.md)
