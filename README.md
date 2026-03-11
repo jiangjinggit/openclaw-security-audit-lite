@@ -51,6 +51,7 @@ npm start
 ### Offer packaging
 - [Security baseline offer](docs/SECURITY_BASELINE_OFFER.md)
 - [Private deployment health-check landing copy](docs/PRIVATE_DEPLOYMENT_HEALTHCHECK_LANDING.md)
+- [Deliverables](docs/DELIVERABLES.md)
 - [Chinese security checklist](docs/OPENCLAW_SECURITY_CHECKLIST_CN.md)
 
 ### Roadmap
