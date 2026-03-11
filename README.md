@@ -55,6 +55,8 @@ npm start
 - [Why productized, not consulting](docs/WHY_PRODUCTIZED_NOT_CONSULTING.md)
 - [Pricing and fit](docs/PRICING_AND_FIT.md)
 - [First batch flow](docs/FIRST_BATCH_FLOW.md)
+- [Typical risk scenarios](docs/TYPICAL_RISK_SCENARIOS.md)
+- [Fit guide](docs/FIT_GUIDE.md)
 - [FAQ](docs/FAQ.md)
 - [Chinese security checklist](docs/OPENCLAW_SECURITY_CHECKLIST_CN.md)
 
