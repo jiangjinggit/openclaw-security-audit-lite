@@ -374,6 +374,24 @@
   </section>
 
   <section>
+    <h2>修复前后对比卡</h2>
+    <div class="grid">
+      <article class="card">
+        <strong>修复前</strong>
+        <span>72 / 100，中风险。最高优先级：公网暴露 + 日志缺失 + 权限边界过宽。</span>
+      </article>
+      <article class="card">
+        <strong>修复后</strong>
+        <span>41 / 100，低中风险。最高优先级问题已明显减少，当前更接近可上线基线。</span>
+      </article>
+      <article class="card">
+        <strong>本轮变化</strong>
+        <span>已补基础访问边界、日志收敛和部分权限收缩，剩余问题转入下一轮加固。</span>
+      </article>
+    </div>
+  </section>
+
+  <section>
     <h2>匿名案例结果会怎么展示</h2>
     <div class="grid">
       <article class="card">
@@ -421,6 +439,18 @@
       <article class="card">
         <strong>复检结果</strong>
         <span>修完以后再看一次，确认风险是否明显收敛，而不是修完就结束。</span>
+      </article>
+      <article class="card">
+        <strong>Skill 来源风险</strong>
+        <span>提示哪些 skill 来源不够清楚，是否建议继续安装或先人工确认。</span>
+      </article>
+      <article class="card">
+        <strong>权限组合风险</strong>
+        <span>提示哪些 browser / message / exec / nodes 权限组合当前过宽。</span>
+      </article>
+      <article class="card">
+        <strong>是否建议直接安装</strong>
+        <span>给出更接近实际购买决策的问题：现在敢不敢直接装进真实环境。</span>
       </article>
     </div>
     <div class="button-row">

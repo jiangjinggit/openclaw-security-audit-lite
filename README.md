@@ -61,6 +61,8 @@ npm start
 - [Skill risk positioning](docs/SKILL_RISK_POSITIONING.md)
 - [Recheck before/after](docs/RECHECK_BEFORE_AFTER.md)
 - [Delivery artifacts plus](docs/DELIVERY_ARTIFACTS_PLUS.md)
+- [Before/after cards](docs/BEFORE_AFTER_CARDS.md)
+- [Skill scan outputs](docs/SKILL_SCAN_OUTPUTS.md)
 - [Plan comparison](docs/PLAN_COMPARISON.md)
 - [Case placeholders](docs/CASE_PLACEHOLDERS.md)
 - [Anonymous case result format](docs/ANON_CASE_RESULTS.md)
