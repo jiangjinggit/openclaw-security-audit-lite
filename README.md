@@ -78,6 +78,7 @@ npm start
 - Better export formatting
 - Better customer-side history view
 - Team / multi-instance positioning
+- Then switch focus back to `openclaw-monitor-lite` for the longer-term AgentOps shell
 
 ---
 
