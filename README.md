@@ -51,6 +51,8 @@ npm start
 ### Offer packaging
 - [Security baseline offer](docs/SECURITY_BASELINE_OFFER.md)
 - [Private deployment health-check landing copy](docs/PRIVATE_DEPLOYMENT_HEALTHCHECK_LANDING.md)
+- [First 299 RMB offer](docs/FIRST_OFFER_299.md)
+- [Security + observability positioning](docs/SECURITY_PLUS_OBSERVABILITY.md)
 - [Deliverables](docs/DELIVERABLES.md)
 - [Why productized, not consulting](docs/WHY_PRODUCTIZED_NOT_CONSULTING.md)
 - [Why now](docs/WHY_NOW.md)
