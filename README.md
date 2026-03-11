@@ -55,6 +55,8 @@ npm start
 - [Security + observability positioning](docs/SECURITY_PLUS_OBSERVABILITY.md)
 - [Plan comparison](docs/PLAN_COMPARISON.md)
 - [Case placeholders](docs/CASE_PLACEHOLDERS.md)
+- [Anonymous case result format](docs/ANON_CASE_RESULTS.md)
+- [24h / 48h delivery expectations](docs/SLA_EXPECTATIONS.md)
 - [Deliverables](docs/DELIVERABLES.md)
 - [Why productized, not consulting](docs/WHY_PRODUCTIZED_NOT_CONSULTING.md)
 - [Why now](docs/WHY_NOW.md)
