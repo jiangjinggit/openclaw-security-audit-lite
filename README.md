@@ -58,6 +58,8 @@ npm start
 - [Scarcity strategy](docs/SCARCITY_STRATEGY.md)
 - [Security + observability positioning](docs/SECURITY_PLUS_OBSERVABILITY.md)
 - [Baseline hardening and recheck](docs/BASELINE_AND_RECHECK.md)
+- [Skill risk positioning](docs/SKILL_RISK_POSITIONING.md)
+- [Recheck before/after](docs/RECHECK_BEFORE_AFTER.md)
 - [Plan comparison](docs/PLAN_COMPARISON.md)
 - [Case placeholders](docs/CASE_PLACEHOLDERS.md)
 - [Anonymous case result format](docs/ANON_CASE_RESULTS.md)
