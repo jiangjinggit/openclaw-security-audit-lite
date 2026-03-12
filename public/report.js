@@ -12,11 +12,30 @@ const launchAdviceMap = {
   low: '当前已接近可上线状态，建议带着例行巡检和告警继续运行。'
 };
 
+const actionCardMap = {
+  '管理入口公网可达': {
+    name: '公网暴露收敛卡',
+    action: '加反向代理鉴权、来源限制、最小暴露面',
+    templateKey: 'reverse-proxy-gateway-guard'
+  },
+  '工具权限过宽': {
+    name: '高权限收缩卡',
+    action: '拆分开发/生产权限，限制高风险工具范围',
+    templateKey: 'runtime-permission-split'
+  },
+  '缺少审计日志与异常留痕': {
+    name: '审计留痕补齐卡',
+    action: '补日志保留、异常记录、巡检日志',
+    templateKey: 'audit-log-retention'
+  }
+};
+
 Promise.all([
   fetch('/api/report').then(r => r.json()),
   fetch('/api/report-template').then(r => r.json()),
-  fetch('/api/report-priority').then(r => r.json())
-]).then(([data, template, priorityMap]) => {
+  fetch('/api/report-priority').then(r => r.json()),
+  fetch('/data/template-pack-map.json').then(r => r.json())
+]).then(([data, template, priorityMap, templateMap]) => {
   const grouped = { high: [], medium: [], low: [] };
   data.findings.forEach(item => {
     if (!grouped[item.severity]) grouped[item.severity] = [];
@@ -29,7 +48,12 @@ Promise.all([
     ...(grouped.low || [])
   ];
 
-  const topFixes = orderedFindings.slice(0, 3);
+  const topFixes = orderedFindings.slice(0, 3).map(item => {
+    const mapped = templateMap.find(entry => entry.ruleTitle === item.title) || null;
+    const card = actionCardMap[item.title] || null;
+    return { ...item, mapped, card };
+  });
+
   const scoreClass = data.riskLevel || 'medium';
   const levelLabel = levelLabelMap[data.riskLevel] || '待评估';
   const launchAdvice = launchAdviceMap[data.riskLevel] || '建议结合详细报告继续评估。';
@@ -71,8 +95,24 @@ Promise.all([
             <h3>${item.title}</h3>
             <p><strong>为什么先修：</strong>${item.evidence}</p>
             <p><strong>建议动作：</strong>${item.fix}</p>
+            ${item.mapped ? `<p><strong>优先套用模板：</strong>${item.mapped.templatePack}</p>` : ''}
+            ${item.card ? `<p><strong>对应动作卡：</strong>${item.card.name}</p>` : ''}
           </article>
         `).join('') || '<div class="finding">当前没有可排序的问题项</div>'}
+      </div>
+    </section>
+
+    <section>
+      <h2>模板包与修复动作入口</h2>
+      <div class="grid">
+        ${topFixes.map(item => `
+          <article class="card template-card">
+            <strong>${item.title}</strong>
+            <span>${item.mapped ? item.mapped.why : '建议结合详细报告继续判断适合的模板方向。'}</span>
+            ${item.mapped ? `<p><strong>模板方向：</strong>${item.mapped.templatePack}</p><p><strong>模板 key：</strong><code>${item.mapped.templateKey}</code></p>` : ''}
+            ${item.card ? `<p><strong>修复动作卡：</strong>${item.card.name}</p><p><strong>先做动作：</strong>${item.card.action}</p>` : ''}
+          </article>
+        `).join('')}
       </div>
     </section>
 

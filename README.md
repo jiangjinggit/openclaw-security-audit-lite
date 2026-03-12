@@ -68,6 +68,7 @@ npm start
 - [Template pack](docs/TEMPLATE_PACK.md)
 - [Rule to template map](docs/RULE_TO_TEMPLATE_MAP.md)
 - [Remediation action cards](docs/REMEDIATION_ACTION_CARDS.md)
+- [Report to template flow](docs/REPORT_TO_TEMPLATE_FLOW.md)
 - [Plan comparison](docs/PLAN_COMPARISON.md)
 - [Case placeholders](docs/CASE_PLACEHOLDERS.md)
 - [Anonymous case result format](docs/ANON_CASE_RESULTS.md)
