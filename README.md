@@ -66,6 +66,8 @@ npm start
 - [Report readability](docs/REPORT_READABILITY.md)
 - [Rules library](docs/RULES_LIBRARY.md)
 - [Template pack](docs/TEMPLATE_PACK.md)
+- [Rule to template map](docs/RULE_TO_TEMPLATE_MAP.md)
+- [Remediation action cards](docs/REMEDIATION_ACTION_CARDS.md)
 - [Plan comparison](docs/PLAN_COMPARISON.md)
 - [Case placeholders](docs/CASE_PLACEHOLDERS.md)
 - [Anonymous case result format](docs/ANON_CASE_RESULTS.md)

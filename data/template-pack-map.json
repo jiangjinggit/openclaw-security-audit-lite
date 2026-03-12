@@ -1,0 +1,44 @@
+[
+  {
+    "ruleId": "exposure-public-gateway",
+    "ruleTitle": "管理入口公网可达",
+    "templatePack": "反向代理 / 来源限制 / 网关前置示例",
+    "templateKey": "reverse-proxy-gateway-guard",
+    "why": "先把暴露面收窄，避免管理入口直接暴露在公网。"
+  },
+  {
+    "ruleId": "auth-missing",
+    "ruleTitle": "关键入口鉴权缺失",
+    "templatePack": "反向代理 / 来源限制 / 网关前置示例",
+    "templateKey": "auth-gateway-baseline",
+    "why": "为关键入口补鉴权和来源限制，是高优先级基础动作。"
+  },
+  {
+    "ruleId": "permission-wide-tools",
+    "ruleTitle": "工具权限过宽",
+    "templatePack": "systemd 运行与权限边界示例",
+    "templateKey": "runtime-permission-split",
+    "why": "通过运行权限拆分和环境隔离，降低高风险工具组合暴露。"
+  },
+  {
+    "ruleId": "skill-source-risk",
+    "ruleTitle": "Skill 来源不可追溯",
+    "templatePack": "复检前检查与上线前确认模板",
+    "templateKey": "skill-whitelist-review",
+    "why": "先建立 skill 白名单和启用前检查，避免未知来源直接进入真实环境。"
+  },
+  {
+    "ruleId": "audit-log-missing",
+    "ruleTitle": "缺少审计日志与异常留痕",
+    "templatePack": "文件权限与日志保留示例",
+    "templateKey": "audit-log-retention",
+    "why": "没有日志留痕就难以复盘和复检，这类问题应尽早补齐。"
+  },
+  {
+    "ruleId": "cost-check-missing",
+    "ruleTitle": "缺少成本与异常波动检查",
+    "templatePack": "复检前检查与上线前确认模板",
+    "templateKey": "weekly-recheck-budget-check",
+    "why": "作为低风险项，适合纳入例行巡检和复检模板。"
+  }
+]
