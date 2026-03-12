@@ -64,6 +64,8 @@ npm start
 - [Before/after cards](docs/BEFORE_AFTER_CARDS.md)
 - [Skill scan outputs](docs/SKILL_SCAN_OUTPUTS.md)
 - [Report readability](docs/REPORT_READABILITY.md)
+- [Rules library](docs/RULES_LIBRARY.md)
+- [Template pack](docs/TEMPLATE_PACK.md)
 - [Plan comparison](docs/PLAN_COMPARISON.md)
 - [Case placeholders](docs/CASE_PLACEHOLDERS.md)
 - [Anonymous case result format](docs/ANON_CASE_RESULTS.md)
