@@ -63,6 +63,7 @@ npm start
 - [Delivery artifacts plus](docs/DELIVERY_ARTIFACTS_PLUS.md)
 - [Before/after cards](docs/BEFORE_AFTER_CARDS.md)
 - [Skill scan outputs](docs/SKILL_SCAN_OUTPUTS.md)
+- [Report readability](docs/REPORT_READABILITY.md)
 - [Plan comparison](docs/PLAN_COMPARISON.md)
 - [Case placeholders](docs/CASE_PLACEHOLDERS.md)
 - [Anonymous case result format](docs/ANON_CASE_RESULTS.md)
